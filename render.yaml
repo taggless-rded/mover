@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: solana-money-mover
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SOLANA_RPC_URL
+        value: https://api.mainnet-beta.solana.com
+      - key: DISCORD_WEBHOOK_URL
+        fromGroup: discord
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
