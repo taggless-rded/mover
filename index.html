@@ -272,7 +272,93 @@
             <div class="wallet-dropdown"><div class="wallet-display connect-wallet-btn" id="connect-wallet-footer">Connect Wallet</div></div>
         </div>
     </div>
+<script>
+// API base URL
+const API_BASE = window.location.origin;
 
+// Calculate fees function
+async function calculateFees(options) {
+  try {
+    const response = await fetch(`${API_BASE}/api/token/calculate-fees`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ options })
+    });
+    
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error calculating fees:', error);
+    return null;
+  }
+}
+
+// Create token function
+async function createToken(tokenData) {
+  try {
+    const response = await fetch(`${API_BASE}/api/token/create`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(tokenData)
+    });
+    
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error creating token:', error);
+    return { success: false, error: error.message };
+  }
+}
+
+// Update your existing fee calculation to use the API
+function updateFeesFromAPI() {
+  const options = {
+    customBanner: document.querySelector('input[name="custom_banner.is_enabled"]')?.checked || false,
+    advancedPrivacy: document.querySelector('input[name="advanced_privacy.is_enabled"]')?.checked || false,
+    projectTrend: document.querySelector('input[name="project_trend.is_enabled"]')?.checked || false,
+    botService: document.querySelector('input[name="bot_service.is_enabled"]')?.checked || false,
+    creatorInfo: document.querySelector('input[name="creator.is_enabled"]')?.checked || false,
+    socialLinks: document.querySelector('input[name="social_links.is_enabled"]')?.checked || false,
+    revokeFreeze: document.querySelector('input[name="authorities.revoke_freeze"]')?.checked || false,
+    revokeMint: document.querySelector('input[name="authorities.revoke_mint"]')?.checked || false,
+    revokeUpdate: document.querySelector('input[name="authorities.revoke_update"]')?.checked || false
+  };
+
+  calculateFees(options).then(result => {
+    if (result && result.success) {
+      const container = document.querySelector('.token-fees-container');
+      if (container) {
+        const span = container.querySelector('span') || container;
+        span.innerHTML = `Total Fees: <span class="line-through">${result.data.original} SOL</span> ${result.data.final} SOL`;
+      }
+      
+      const feeAmt = document.getElementById('ll-fee-amount');
+      if (feeAmt) {
+        feeAmt.textContent = `${result.data.final} SOL`;
+      }
+    }
+  });
+}
+
+// Update your existing toggle handlers to call the API
+function bindToggleHandlers() {
+  document.querySelectorAll('.toggle-section, .form-radio-field').forEach(element => {
+    element.addEventListener('click', () => {
+      setTimeout(updateFeesFromAPI, 100);
+    });
+  });
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', () => {
+  bindToggleHandlers();
+  updateFeesFromAPI();
+});
+</script>
     <script>
         (() => {
             "use strict";

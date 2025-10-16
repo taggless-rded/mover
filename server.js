@@ -1,79 +1,146 @@
 const express = require('express');
 const cors = require('cors');
-const helmet = require('helmet');
-const compression = require('compression');
 const path = require('path');
-require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(helmet({
-  contentSecurityPolicy: false, // Disable for development, configure properly for production
-  crossOriginEmbedderPolicy: false
-}));
 app.use(cors());
-app.use(compression());
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Serve static files
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/asset1', express.static(path.join(__dirname, 'public/asset1')));
-app.use('/asset2', express.static(path.join(__dirname, 'public/asset2')));
-app.use('/css', express.static(path.join(__dirname, 'public/css')));
+// Serve static files from current directory
+app.use(express.static(__dirname));
+app.use('/asset1', express.static(path.join(__dirname, 'asset1')));
+app.use('/asset2', express.static(path.join(__dirname, 'asset2')));
 
 // API Routes
-app.use('/api/token', require('./routes/token'));
-app.use('/api/wallet', require('./routes/wallet'));
-app.use('/api/transaction', require('./routes/transaction'));
-
-// Serve main HTML file
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
-// Serve other pages
-app.get('/tools', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'tools.html'));
-});
-
-app.get('/terms-of-service', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'terms-of-service.html'));
-});
-
-app.get('/privacy-policy', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'privacy-policy.html'));
-});
-
-// Health check endpoint
-app.get('/health', (req, res) => {
-  res.status(200).json({ 
+app.get('/api/health', (req, res) => {
+  res.json({ 
     status: 'OK', 
-    timestamp: new Date().toISOString(),
-    service: 'Luna Launch API'
+    message: 'Luna Launch API is running',
+    timestamp: new Date().toISOString()
   });
+});
+
+app.post('/api/token/calculate-fees', (req, res) => {
+  try {
+    const { options = {} } = req.body;
+    
+    // Base platform fee
+    let totalFee = 0.3;
+    
+    // Add fees for optional features
+    if (options.customBanner) totalFee += 0.1;
+    if (options.advancedPrivacy) totalFee += 0.5;
+    if (options.projectTrend) totalFee += 0.3;
+    if (options.botService) totalFee += 1.0;
+    if (options.creatorInfo) totalFee += 0.1;
+    if (options.socialLinks) totalFee += 0.1;
+    
+    // Add fees for authority revocations
+    if (options.revokeFreeze) totalFee += 0.1;
+    if (options.revokeMint) totalFee += 0.1;
+    if (options.revokeUpdate) totalFee += 0.1;
+    
+    // Apply 50% discount
+    const discountFactor = 0.5;
+    const discountedFee = totalFee * discountFactor;
+    
+    res.json({
+      success: true,
+      data: {
+        original: parseFloat(totalFee.toFixed(2)),
+        discounted: parseFloat(discountedFee.toFixed(2)),
+        final: parseFloat(discountedFee.toFixed(2))
+      }
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      error: error.message
+    });
+  }
+});
+
+app.post('/api/token/create', (req, res) => {
+  try {
+    const { tokenParams, options } = req.body;
+    
+    // Validate required fields
+    if (!tokenParams || !tokenParams.name || !tokenParams.symbol) {
+      return res.status(400).json({
+        success: false,
+        error: 'Token name and symbol are required'
+      });
+    }
+    
+    // Simulate token creation (in real app, this would create on blockchain)
+    const mockTokenAddress = `Token${Math.random().toString(36).substr(2, 9)}`;
+    
+    // Calculate fees
+    let totalFee = 0.3;
+    if (options) {
+      if (options.customBanner) totalFee += 0.1;
+      if (options.advancedPrivacy) totalFee += 0.5;
+      // Add other options as needed
+    }
+    const finalFee = totalFee * 0.5; // 50% discount
+    
+    res.json({
+      success: true,
+      data: {
+        mint: mockTokenAddress,
+        transactionId: `tx${Math.random().toString(36).substr(2, 9)}`,
+        fees: {
+          original: totalFee,
+          discounted: finalFee,
+          final: finalFee
+        },
+        message: 'Token created successfully (simulation)'
+      }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+});
+
+app.get('/api/transaction/verify/:txId', (req, res) => {
+  const { txId } = req.params;
+  
+  // Simulate transaction verification
+  res.json({
+    success: true,
+    data: {
+      transactionId: txId,
+      status: 'confirmed',
+      verified: true,
+      timestamp: new Date().toISOString()
+    }
+  });
+});
+
+// Serve the main HTML file for all other routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-  console.error('Error:', err.stack);
+  console.error('Server Error:', err);
   res.status(500).json({ 
-    error: 'Something went wrong!',
-    message: process.env.NODE_ENV === 'production' ? 'Internal server error' : err.message
+    success: false,
+    error: 'Internal server error',
+    message: process.env.NODE_ENV === 'production' ? 'Something went wrong' : err.message
   });
-});
-
-// 404 handler
-app.use((req, res) => {
-  res.status(404).json({ error: 'Route not found' });
 });
 
 app.listen(PORT, () => {
   console.log(`🚀 Luna Launch server running on port ${PORT}`);
-  console.log(`📱 Environment: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`🌐 URL: http://localhost:${PORT}`);
+  console.log(`📱 Health check: http://localhost:${PORT}/api/health`);
+  console.log(`🌐 Main app: http://localhost:${PORT}`);
 });
-
-module.exports = app;
